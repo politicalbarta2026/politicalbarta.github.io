@@ -3,12 +3,554 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>রাজনৈতিক বার্তা</title>
+
+  <title>রাজনৈতিক বার্তা | বাংলাদেশের রাজনৈতিক খবর</title>
+  <meta name="description" content="বাংলাদেশের রাজনৈতিক খবর ও সংবাদ - রাজনৈতিক বার্তা">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, "Noto Sans Bengali", sans-serif;
+      background: #f4f6f8;
+      color: #222;
+    }
+
+    /* Header */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .top-header {
+      max-width: 1200px;
+      margin: auto;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: bold;
+      color: #087f3f;
+    }
+
+    .tagline {
+      color: #777;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 5px;
+    }
+
+    .search-box input {
+      width: 200px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    .search-box button {
+      padding: 10px 15px;
+      border: none;
+      background: #087f3f;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Navigation */
+    nav {
+      background: #087f3f;
+    }
+
+    .nav-menu {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      list-style: none;
+      overflow-x: auto;
+    }
+
+    .nav-menu li a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      padding: 14px 18px;
+      white-space: nowrap;
+    }
+
+    .nav-menu li a:hover {
+      background: #065d2e;
+    }
+
+    /* Breaking News */
+    .breaking {
+      max-width: 1200px;
+      margin: 15px auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .breaking-title {
+      background: #d60000;
+      color: white;
+      padding: 10px 15px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .breaking-text {
+      background: white;
+      padding: 10px 15px;
+      flex: 1;
+      border: 1px solid #ddd;
+    }
+
+    /* Main */
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px 40px;
+    }
+
+    .section-title {
+      font-size: 25px;
+      border-left: 5px solid #087f3f;
+      padding-left: 10px;
+      margin: 25px 0 15px;
+    }
+
+    /* Featured News */
+    .featured {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    .featured-main,
+    .featured-small {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    .featured-main img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      background: #ddd;
+    }
+
+    .featured-content {
+      padding: 18px;
+    }
+
+    .featured-content h2 {
+      font-size: 25px;
+      line-height: 1.4;
+    }
+
+    .featured-small {
+      display: flex;
+      margin-bottom: 15px;
+    }
+
+    .featured-small img {
+      width: 120px;
+      height: 100px;
+      object-fit: cover;
+      background: #ddd;
+    }
+
+    .featured-small-content {
+      padding: 10px;
+    }
+
+    .featured-small h3 {
+      font-size: 17px;
+      line-height: 1.4;
+    }
+
+    /* News Grid */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .news-card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+      transition: .2s;
+    }
+
+    .news-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .news-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      background: #ddd;
+    }
+
+    .news-content {
+      padding: 15px;
+    }
+
+    .category {
+      display: inline-block;
+      color: #087f3f;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    .news-content h3 {
+      font-size: 19px;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .date {
+      color: #888;
+      font-size: 13px;
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 30px;
+    }
+
+    footer h2 {
+      color: #35b76b;
+      margin-bottom: 10px;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+
+      .top-header {
+        display: block;
+        text-align: center;
+      }
+
+      .logo {
+        font-size: 27px;
+      }
+
+      .search-box {
+        margin-top: 15px;
+        justify-content: center;
+      }
+
+      .search-box input {
+        width: 70%;
+      }
+
+      .featured {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-main img {
+        height: 230px;
+      }
+
+      .news-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .breaking {
+        padding: 0 10px;
+      }
+
+      .container {
+        padding: 0 10px 30px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-  <h1>রাজনৈতিক বার্তা</h1>
+<header>
+
+  <div class="top-header">
+
+    <div>
+      <div class="logo">রাজনৈতিক বার্তা</div>
+      <div class="tagline">বাংলাদেশের রাজনৈতিক খবর ও সংবাদ</div>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="খবর খুঁজুন...">
+      <button onclick="searchNews()">খুঁজুন</button>
+    </div>
+
+  </div>
+
+  <nav>
+    <ul class="nav-menu">
+      <li><a href="#">হোম</a></li>
+      <li><a href="#">জাতীয়</a></li>
+      <li><a href="#">রাজনীতি</a></li>
+      <li><a href="#">আন্তর্জাতিক</a></li>
+      <li><a href="#">অর্থনীতি</a></li>
+      <li><a href="#">খেলাধুলা</a></li>
+      <li><a href="#">বিনোদন</a></li>
+      <li><a href="#">মতামত</a></li>
+    </ul>
+  </nav>
+
+</header>
+
+
+<!-- Breaking News -->
+
+<div class="breaking">
+
+  <div class="breaking-title">
+    🔴 ব্রেকিং নিউজ
+  </div>
+
+  <div class="breaking-text">
+    রাজনৈতিক বার্তায় আপনাকে স্বাগতম — সর্বশেষ খবর পেতে আমাদের সঙ্গে থাকুন।
+  </div>
+
+</div>
+
+
+<main class="container">
+
+  <h2 class="section-title">সর্বশেষ খবর</h2>
+
+  <!-- Featured -->
+
+  <div class="featured">
+
+    <div class="featured-main">
+
+      <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1200&q=80"
+           alt="রাজনীতি">
+
+      <div class="featured-content">
+
+        <span class="category">রাজনীতি</span>
+
+        <h2>
+          বাংলাদেশের রাজনীতিতে নতুন আলোচনা, নজর সবার পরবর্তী ঘটনাপ্রবাহে
+        </h2>
+
+        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+
+      </div>
+
+    </div>
+
+
+    <div>
+
+      <div class="featured-small">
+
+        <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=500&q=80">
+
+        <div class="featured-small-content">
+          <span class="category">জাতীয়</span>
+          <h3>দেশের গুরুত্বপূর্ণ বিষয়ে নতুন আলোচনা</h3>
+        </div>
+
+      </div>
+
+
+      <div class="featured-small">
+
+        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=500&q=80">
+
+        <div class="featured-small-content">
+          <span class="category">সংবাদ</span>
+          <h3>সর্বশেষ খবর ও আপডেট দেখুন</h3>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <h2 class="section-title">জনপ্রিয় খবর</h2>
+
+  <div class="news-grid" id="newsGrid">
+
+    <article class="news-card">
+
+      <img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=800&q=80">
+
+      <div class="news-content">
+
+        <span class="category">রাজনীতি</span>
+
+        <h3>রাজনৈতিক অঙ্গনে গুরুত্বপূর্ণ আলোচনা চলছে</h3>
+
+        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+
+      </div>
+
+    </article>
+
+
+    <article class="news-card">
+
+      <img src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=800&q=80">
+
+      <div class="news-content">
+
+        <span class="category">জাতীয়</span>
+
+        <h3>জাতীয় পর্যায়ে নতুন সিদ্ধান্ত নিয়ে আলোচনা</h3>
+
+        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+
+      </div>
+
+    </article>
+
+
+    <article class="news-card">
+
+      <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80">
+
+      <div class="news-content">
+
+        <span class="category">অর্থনীতি</span>
+
+        <h3>অর্থনীতি নিয়ে বিশেষজ্ঞদের নতুন মতামত</h3>
+
+        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+
+      </div>
+
+    </article>
+
+
+    <article class="news-card">
+
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80">
+
+      <div class="news-content">
+
+        <span class="category">আন্তর্জাতিক</span>
+
+        <h3>আন্তর্জাতিক অঙ্গনের গুরুত্বপূর্ণ খবর</h3>
+
+        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+
+      </div>
+
+    </article>
+
+
+    <article class="news-card">
+
+      <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80">
+
+      <div class="news-content">
+
+        <span class="category">খেলাধুলা</span>
+
+        <h3>খেলার মাঠে আজকের গুরুত্বপূর্ণ আপডেট</h3>
+
+        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+
+      </div>
+
+    </article>
+
+
+    <article class="news-card">
+
+      <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=800&q=80">
+
+      <div class="news-content">
+
+        <span class="category">বিনোদন</span>
+
+        <h3>বিনোদন জগতের নতুন খবর</h3>
+
+        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</main>
+
+
+<footer>
+
+  <h2>রাজনৈতিক বার্তা</h2>
+
   <p>বাংলাদেশের রাজনৈতিক খবর ও সংবাদ</p>
+
+  <br>
+
+  <p>© ২০২৬ রাজনৈতিক বার্তা — সর্বস্বত্ব সংরক্ষিত</p>
+
+</footer>
+
+
+<script>
+
+function searchNews() {
+
+  const input = document
+    .getElementById("searchInput")
+    .value
+    .toLowerCase();
+
+  const cards = document.querySelectorAll(".news-card");
+
+  cards.forEach(card => {
+
+    const text = card.innerText.toLowerCase();
+
+    if (text.includes(input)) {
+      card.style.display = "";
+    } else {
+      card.style.display = "none";
+    }
+
+  });
+
+}
+
+</script>
 
 </body>
 </html>
