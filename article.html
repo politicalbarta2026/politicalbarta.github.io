@@ -101,7 +101,7 @@ footer h2{color:#35b76b;margin-bottom:7px}
 <header class="topbar">
   <div class="topbar-inner">
     <div class="brand">রাজনৈতিক বার্তা</div>
-    <button class="back-btn" onclick="history.back()">← ফিরে যান</button>
+    <button class="back-btn" onclick="location.href='./index.html'">← ফিরে যান</button>
   </div>
 </header>
 
@@ -163,9 +163,9 @@ footer h2{color:#35b76b;margin-bottom:7px}
   const title=params.get("title")||saved?.title||"খবর";
   const date=params.get("date")||saved?.date||"";
   const summary=params.get("summary")||"";
-  const content=saved?.content||summary||"এই সংবাদের বিস্তারিত তথ্য শিগগিরই প্রকাশ করা হবে।";
+  const content=(saved?.title===title && saved?.content) ? saved.content : (summary||"এই সংবাদের বিস্তারিত তথ্য শিগগিরই প্রকাশ করা হবে।");
   const icon=params.get("icon")||saved?.icon||"📰";
-  const image=saved?.image||"";
+  const image=(saved?.title===title && saved?.image) ? saved.image : "";
 
   document.getElementById("category").textContent=category;
   document.getElementById("title").textContent=title;
