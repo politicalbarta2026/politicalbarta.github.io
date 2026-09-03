@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>রাজনৈতিক বার্তা | বাংলাদেশের রাজনৈতিক খবর</title>
+<meta name="description" content="বাংলাদেশের রাজনৈতিক খবর ও সংবাদ - রাজনৈতিক বার্তা">
+<meta name="theme-color" content="#087f3f">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:Arial,"Noto Sans Bengali","SolaimanLipi",sans-serif;
+  background:#f3f5f7;color:#222;line-height:1.6
+}
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+header{
+  background:#fff;border-bottom:1px solid #ddd;position:sticky;top:0;z-index:1000
+}
+.top-header{
+  max-width:1200px;margin:auto;padding:16px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px
+}
+.logo{font-size:32px;font-weight:800;color:#087f3f}
+.tagline{color:#777;font-size:14px;margin-top:2px}
+.search-box{display:flex;gap:7px}
+.search-box input{
+  width:240px;padding:11px 13px;border:1px solid #ccc;border-radius:8px;
+  outline:none;background:#fff
+}
+.search-box input:focus{
+  border-color:#087f3f;box-shadow:0 0 0 3px rgba(8,127,63,.1)
+}
+.search-box button{
+  padding:11px 17px;border:0;background:#087f3f;color:#fff;border-radius:8px
+}
+.search-box button:hover{background:#065d2e}
+
+nav{background:#087f3f}
+.nav-menu{
+  max-width:1200px;margin:auto;display:flex;list-style:none;
+  overflow-x:auto;scrollbar-width:none
+}
+.nav-menu::-webkit-scrollbar{display:none}
+.nav-menu li a{
+  display:block;color:#fff;text-decoration:none;padding:13px 18px;
+  white-space:nowrap
+}
+.nav-menu li a:hover,.nav-menu li a.active{background:#065d2e}
+
+.breaking{
+  max-width:1200px;margin:15px auto;padding:0 20px;
+  display:flex;align-items:stretch
+}
+.breaking-title{
+  background:#d60000;color:#fff;padding:10px 15px;font-weight:bold;white-space:nowrap
+}
+.breaking-text{
+  background:#fff;padding:10px 15px;flex:1;border:1px solid #ddd;
+  overflow:hidden;white-space:nowrap
+}
+
+.news-container{max-width:1200px;margin:auto;padding:0 20px 40px}
+.section-title{
+  font-size:25px;border-left:5px solid #087f3f;padding-left:10px;
+  margin:25px 0 15px
+}
+
+/* ছবির জন্য external URL ব্যবহার করা হয়নি */
+.news-image{
+  width:100%;height:320px;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#087f3f,#0b5e34 55%,#183d2a);
+  color:#fff
+}
+.news-image::before{
+  content:"";position:absolute;width:230px;height:230px;border-radius:50%;
+  border:35px solid rgba(255,255,255,.09);right:-60px;top:-65px
+}
+.news-image::after{
+  content:"";position:absolute;width:170px;height:170px;border-radius:50%;
+  background:rgba(255,255,255,.06);left:-70px;bottom:-80px
+}
+.news-icon{
+  position:relative;z-index:1;font-size:75px;filter:drop-shadow(0 5px 8px rgba(0,0,0,.2))
+}
+.news-image .image-label{
+  position:absolute;z-index:1;bottom:16px;left:18px;
+  background:rgba(0,0,0,.35);padding:5px 10px;border-radius:6px;
+  font-size:13px
+}
+.featured{
+  display:grid;grid-template-columns:2fr 1fr;gap:20px
+}
+.featured-main,.featured-small,.news-card{
+  background:#fff;border-radius:10px;overflow:hidden;
+  box-shadow:0 2px 9px rgba(0,0,0,.08)
+}
+.featured-main .news-image{height:320px}
+.featured-content{padding:18px}
+.featured-content h2{font-size:25px;line-height:1.45;margin-bottom:7px}
+.featured-small{display:flex;margin-bottom:15px}
+.featured-small:last-child{margin-bottom:0}
+.featured-small .news-image{
+  width:120px;height:100px;flex:none
+}
+.featured-small .news-icon{font-size:37px}
+.featured-small .image-label{display:none}
+.featured-small-content{padding:10px}
+.featured-small h3{font-size:17px;line-height:1.4}
+
+.news-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px
+}
+.news-card{transition:transform .2s,box-shadow .2s}
+.news-card:hover{
+  transform:translateY(-3px);box-shadow:0 7px 18px rgba(0,0,0,.12)
+}
+.news-card .news-image{height:190px}
+.news-card .news-icon{font-size:55px}
+.news-content{padding:15px}
+.category{
+  display:inline-block;color:#087f3f;font-size:13px;font-weight:bold;margin-bottom:7px
+}
+.news-content h3{font-size:19px;line-height:1.5;margin-bottom:8px}
+.date{color:#888;font-size:13px}
+.news-summary{color:#555;font-size:14px;margin:8px 0}
+.no-results{
+  grid-column:1/-1;text-align:center;background:#fff;padding:35px;
+  border-radius:9px;color:#777
+}
+
+/* ACCOUNT */
+.account-section{max-width:1200px;margin:40px auto;padding:0 20px}
+.account-box{
+  width:100%;max-width:420px;margin:auto;background:#fff;padding:30px 25px;
+  border-radius:18px;box-shadow:0 8px 30px rgba(0,0,0,.12)
+}
+.account-logo{text-align:center;font-size:32px;font-weight:bold;color:#087f3f;margin-bottom:8px}
+.account-subtitle{text-align:center;color:#666;margin-bottom:25px}
+.account-box h2{text-align:center;margin-bottom:20px}
+.account-box input{
+  width:100%;padding:14px;margin-bottom:12px;border:1px solid #ddd;
+  border-radius:10px;font-size:16px;outline:none
+}
+.account-box input:focus{
+  border-color:#087f3f;box-shadow:0 0 0 3px rgba(8,127,63,.1)
+}
+.account-box button{
+  width:100%;padding:14px;border:0;border-radius:10px;
+  font-size:16px;font-weight:bold;margin-top:5px
+}
+.login-btn{background:#1877f2;color:#fff}
+.signup-btn{background:#42b72a;color:#fff}
+.logout-btn{background:#e53935;color:#fff}
+.login-btn:hover{background:#0f68dd}
+.signup-btn:hover{background:#359d20}
+.logout-btn:hover{background:#c92f2c}
+.switch{
+  text-align:center;margin-top:18px;color:#1877f2;cursor:pointer;
+  font-weight:bold;padding:8px;user-select:none
+}
+.switch:hover{text-decoration:underline}
+.message{
+  text-align:center;margin-top:15px;font-size:14px;min-height:20px;line-height:1.5
+}
+.error{color:#d60000}.success{color:#087f3f}
+.user-box{display:none;text-align:center}
+#signupBox{display:none}#loginBox{display:block}
+.user-email{margin:15px 0;color:#444;word-break:break-word}
+
+footer{
+  background:#111;color:#fff;text-align:center;padding:30px 20px;margin-top:30px
+}
+footer h2{color:#35b76b;margin-bottom:10px}
+.footer-links{margin-top:15px}
+.footer-links a{color:#ddd;text-decoration:none;margin:0 8px}
+.footer-links a:hover{color:#fff}
+
+@media(max-width:768px){
+  .top-header{display:block;text-align:center;padding:14px 12px}
+  .logo{font-size:29px}
+  .search-box{margin-top:14px;justify-content:center}
+  .search-box input{width:72%}
+  .featured{grid-template-columns:1fr}
+  .featured-main .news-image{height:235px}
+  .news-grid{grid-template-columns:1fr}
+  .breaking{padding:0 10px}
+  .news-container{padding:0 10px 30px}
+  .account-section{padding:0 10px}
+  .breaking-title{padding:9px 10px;font-size:14px}
+  .breaking-text{padding:9px 10px;font-size:14px}
+}
+@media(max-width:430px){
+  .logo{font-size:27px}
+  .search-box input{width:68%}
+  .nav-menu li a{padding:11px 14px}
+  .featured-small .news-image{width:105px;height:90px}
+  .featured-content h2{font-size:21px}
+  .section-title{font-size:22px}
+  .account-box{padding:25px 18px}
+}
+
+/* ================= NEWS ARTICLE VIEW ================= */
+.featured-main,.featured-small,.news-card{cursor:pointer}
+.featured-main:focus,.featured-small:focus,.news-card:focus{
+  outline:3px solid rgba(8,127,63,.28);
+  outline-offset:2px
+}
+.article-modal{
+  position:fixed;inset:0;z-index:3000;
+  display:none;align-items:center;justify-content:center;
+  padding:20px;background:rgba(0,0,0,.68)
+}
+.article-modal.show{display:flex}
+.article-dialog{
+  width:min(760px,100%);max-height:90vh;overflow:auto;
+  background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.3);
+  position:relative
+}
+.article-close{
+  position:absolute;right:14px;top:12px;z-index:2;
+  width:42px;height:42px;border:0;border-radius:50%;
+  background:rgba(0,0,0,.65);color:#fff;font-size:27px;line-height:1
+}
+.article-close:hover{background:#000}
+.article-modal-image{
+  width:100%;height:280px;border-radius:16px 16px 0 0;overflow:hidden
+}
+.article-modal-image .news-image{height:280px!important}
+.article-modal-body{padding:25px 28px 30px}
+.article-modal-category{color:#087f3f;font-weight:800;font-size:14px;margin-bottom:7px}
+.article-modal-title{font-size:29px;line-height:1.45;margin-bottom:10px}
+.article-modal-date{color:#888;font-size:14px;margin-bottom:18px}
+.article-modal-text{font-size:17px;line-height:1.9;color:#444;white-space:pre-line}
+.article-hint{
+  text-align:center;color:#777;font-size:13px;margin-top:8px
+}
+@media(max-width:600px){
+  .article-modal{padding:10px}
+  .article-dialog{max-height:92vh;border-radius:13px}
+  .article-modal-image,.article-modal-image .news-image{height:210px!important}
+  .article-modal-body{padding:20px 18px 24px}
+  .article-modal-title{font-size:23px}
+  .article-modal-text{font-size:16px;line-height:1.8}
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="top-header">
+    <div>
+      <div class="logo">রাজনৈতিক বার্তা</div>
+      <div class="tagline">বাংলাদেশের রাজনৈতিক খবর ও সংবাদ</div>
+    </div>
+    <div class="search-box">
+      <input type="search" id="searchInput" placeholder="খবর খুঁজুন..." aria-label="খবর খুঁজুন">
+      <button id="searchBtn" type="button">খুঁজুন</button>
+    </div>
+  </div>
+
+  <nav aria-label="প্রধান নেভিগেশন">
+    <ul class="nav-menu">
+      <li><a href="#home" class="active">হোম</a></li>
+      <li><a href="#national">জাতীয়</a></li>
+      <li><a href="#politics">রাজনীতি</a></li>
+      <li><a href="#international">আন্তর্জাতিক</a></li>
+      <li><a href="#economy">অর্থনীতি</a></li>
+      <li><a href="#sports">খেলাধুলা</a></li>
+      <li><a href="#entertainment">বিনোদন</a></li>
+      <li><a href="#opinion">মতামত</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div id="home" class="breaking">
+  <div class="breaking-title">🔴 ব্রেকিং নিউজ</div>
+  <div class="breaking-text">রাজনৈতিক বার্তায় আপনাকে স্বাগতম — সর্বশেষ খবর পেতে আমাদের সঙ্গে থাকুন।</div>
+</div>
+
+<main class="news-container">
+  <h2 class="section-title">সর্বশেষ খবর</h2>
+
+  <div class="featured">
+    <article class="featured-main" id="politics">
+      <div class="news-image" role="img" aria-label="রাজনীতি বিষয়ক সংবাদ">
+        <div class="news-icon">🏛️</div>
+        <div class="image-label">রাজনৈতিক বার্তা</div>
+      </div>
+      <div class="featured-content">
+        <span class="category">রাজনীতি</span>
+        <h2>বাংলাদেশের রাজনীতিতে নতুন আলোচনা, নজর সবার পরবর্তী ঘটনাপ্রবাহে</h2>
+        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+      </div>
+    </article>
+
+    <div>
+      <article class="featured-small" id="national">
+        <div class="news-image">
+          <div class="news-icon">🇧🇩</div>
+        </div>
+        <div class="featured-small-content">
+          <span class="category">জাতীয়</span>
+          <h3>দেশের গুরুত্বপূর্ণ বিষয়ে নতুন আলোচনা</h3>
+        </div>
+      </article>
+
+      <article class="featured-small" id="international">
+        <div class="news-image">
+          <div class="news-icon">🌍</div>
+        </div>
+        <div class="featured-small-content">
+          <span class="category">আন্তর্জাতিক</span>
+          <h3>সর্বশেষ খবর ও আন্তর্জাতিক আপডেট দেখুন</h3>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <h2 class="section-title">জনপ্রিয় খবর</h2>
+
+  <div class="news-grid" id="newsGrid">
+
+    <article class="news-card">
+      <div class="news-image"><div class="news-icon">🏛️</div><div class="image-label">রাজনীতি</div></div>
+      <div class="news-content">
+        <span class="category">রাজনীতি</span>
+        <h3>রাজনৈতিক অঙ্গনে গুরুত্বপূর্ণ আলোচনা চলছে</h3>
+        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+      </div>
+    </article>
+
+    <article class="news-card">
+      <div class="news-image"><div class="news-icon">🇧🇩</div><div class="image-label">জাতীয়</div></div>
+      <div class="news-content">
+        <span class="category">জাতীয়</span>
+        <h3>জাতীয় পর্যায়ে নতুন সিদ্ধান্ত নিয়ে আলোচনা</h3>
+        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+      </div>
+    </article>
+
+    <article class="news-card" id="economy">
+      <div class="news-image"><div class="news-icon">📈</div><div class="image-label">অর্থনীতি</div></div>
+      <div class="news-content">
+        <span class="category">অর্থনীতি</span>
+        <h3>অর্থনীতি নিয়ে বিশেষজ্ঞদের নতুন মতামত</h3>
+        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+      </div>
+    </article>
+
+    <article class="news-card">
+      <div class="news-image"><div class="news-icon">🌍</div><div class="image-label">আন্তর্জাতিক</div></div>
+      <div class="news-content">
+        <span class="category">আন্তর্জাতিক</span>
+        <h3>আন্তর্জাতিক অঙ্গনের গুরুত্বপূর্ণ খবর</h3>
+        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+      </div>
+    </article>
+
+    <article class="news-card" id="sports">
+      <div class="news-image"><div class="news-icon">🏏</div><div class="image-label">খেলাধুলা</div></div>
+      <div class="news-content">
+        <span class="category">খেলাধুলা</span>
+        <h3>খেলার মাঠে আজকের গুরুত্বপূর্ণ আপডেট</h3>
+        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+      </div>
+    </article>
+
+    <article class="news-card" id="entertainment">
+      <div class="news-image"><div class="news-icon">🎬</div><div class="image-label">বিনোদন</div></div>
+      <div class="news-content">
+        <span class="category">বিনোদন</span>
+        <h3>বিনোদন জগতের নতুন খবর</h3>
+        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+      </div>
+    </article>
+
+  </div>
+
+  <div id="opinion"></div>
+</main>
+
+<section class="account-section" aria-label="অ্যাকাউন্ট">
+  <div class="account-box">
+
+    <div id="loginBox">
+      <div class="account-logo">Political Barta</div>
+      <div class="account-subtitle">আপনার অ্যাকাউন্টে লগইন করুন</div>
+      <h2>Login</h2>
+
+      <input type="email" id="loginEmail" placeholder="Email" autocomplete="email">
+      <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password">
+
+      <button class="login-btn" id="loginBtn" type="button">Login</button>
+
+      <div class="switch" id="showSignup" role="button" tabindex="0">
+        নতুন অ্যাকাউন্ট তৈরি করুন
+      </div>
+
+      <div class="message" id="loginMessage" aria-live="polite"></div>
+    </div>
+
+    <div id="signupBox">
+      <div class="account-logo">Political Barta</div>
+      <div class="account-subtitle">নতুন অ্যাকাউন্ট তৈরি করুন</div>
+      <h2>Sign Up</h2>
+
+      <input type="email" id="signupEmail" placeholder="Email" autocomplete="email">
+      <input type="password" id="signupPassword" placeholder="Password" autocomplete="new-password">
+
+      <button class="signup-btn" id="signupBtn" type="button">Create Account</button>
+
+      <div class="switch" id="showLogin" role="button" tabindex="0">
+        আগে থেকেই অ্যাকাউন্ট আছে? Login
+      </div>
+
+      <div class="message" id="signupMessage" aria-live="polite"></div>
+    </div>
+
+    <div id="userBox" class="user-box">
+      <div class="account-logo">Political Barta</div>
+      <h2>স্বাগতম! 🎉</h2>
+      <p class="user-email" id="userEmail"></p>
+      <button class="logout-btn" id="logoutBtn" type="button">Logout</button>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <h2>রাজনৈতিক বার্তা</h2>
+  <p>বাংলাদেশের রাজনৈতিক খবর ও সংবাদ</p>
+  <div class="footer-links">
+    <a href="#home">হোম</a>
+    <a href="#politics">রাজনীতি</a>
+    <a href="#national">জাতীয়</a>
+    <a href="#opinion">মতামত</a>
+  </div>
+  <br>
+  <p>© ২০২৬ রাজনৈতিক বার্তা — সর্বস্বত্ব সংরক্ষিত</p>
+</footer>
+
+<script>
+(function(){
+  const loginBox=document.getElementById("loginBox");
+  const signupBox=document.getElementById("signupBox");
+  const userBox=document.getElementById("userBox");
+  let accountView="login";
+
+  window.openSignup=function(){
+    accountView="signup";
+    loginBox.style.display="none";
+    signupBox.style.display="block";
+    userBox.style.display="none";
+    document.getElementById("loginMessage").textContent="";
+    document.getElementById("signupMessage").textContent="";
+    signupBox.scrollIntoView({behavior:"smooth",block:"center"});
+  };
+
+  window.openLogin=function(){
+    accountView="login";
+    signupBox.style.display="none";
+    loginBox.style.display="block";
+    userBox.style.display="none";
+    document.getElementById("loginMessage").textContent="";
+    document.getElementById("signupMessage").textContent="";
+  };
+
+  document.getElementById("showSignup").addEventListener("click",window.openSignup);
+  document.getElementById("showLogin").addEventListener("click",window.openLogin);
+
+  ["showSignup","showLogin"].forEach(function(id){
+    document.getElementById(id).addEventListener("keydown",function(e){
+      if(e.key==="Enter"||e.key===" "){e.preventDefault();document.getElementById(id).click();}
+    });
+  });
+
+  window.__accountView=function(){return accountView;};
+})();
+
+function performSearch(){
+  const input=document.getElementById("searchInput").value.toLowerCase().trim();
+  const cards=document.querySelectorAll("#newsGrid .news-card");
+  let found=0;
+
+  cards.forEach(function(card){
+    const match=input===""||card.innerText.toLowerCase().includes(input);
+    card.style.display=match?"":"none";
+    if(match)found++;
+  });
+
+  let noResults=document.getElementById("noResults");
+
+  if(input&&found===0){
+    if(!noResults){
+      noResults=document.createElement("div");
+      noResults.id="noResults";
+      noResults.className="no-results";
+      noResults.textContent="কোনো খবর পাওয়া যায়নি। অন্য শব্দ দিয়ে চেষ্টা করুন।";
+      document.getElementById("newsGrid").appendChild(noResults);
+    }
+  }else if(noResults){
+    noResults.remove();
+  }
+}
+document.getElementById("searchBtn").addEventListener("click",performSearch);
+document.getElementById("searchInput").addEventListener("keydown",function(e){
+  if(e.key==="Enter")performSearch();
+});
+
+function escapeHTML(value){
+  return String(value??"").replace(/[&<>"']/g,function(ch){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch];
+  });
+}
+
+function showAdminNews(){
+  let newsList=[];
+  try{
+    newsList=JSON.parse(localStorage.getItem("politicalNews"))||[];
+  }catch(error){
+    console.error("LocalStorage news error:",error);
+    return;
+  }
+
+  if(!Array.isArray(newsList)||!newsList.length)return;
+
+  const newsGrid=document.getElementById("newsGrid");
+
+  newsList.forEach(function(news){
+    const card=document.createElement("article");
+    card.className="news-card";
+
+    const icon=news.category==="খেলাধুলা"?"🏏":
+                news.category==="বিনোদন"?"🎬":
+                news.category==="অর্থনীতি"?"📈":
+                news.category==="আন্তর্জাতিক"?"🌍":
+                news.category==="জাতীয়"?"🇧🇩":"🏛️";
+
+    card.dataset.adminImage=news.image||"";
+    card.innerHTML=
+      '<div class="news-image"><div class="news-icon">'+icon+
+      '</div><div class="image-label">'+escapeHTML(news.category||"সংবাদ")+
+      '</div></div>'+
+      '<div class="news-content">'+
+      '<span class="category">'+escapeHTML(news.category||"সংবাদ")+'</span>'+
+      '<h3>'+escapeHTML(news.title||"")+'</h3>'+
+      (news.content?'<p class="news-summary">'+escapeHTML(news.content)+'</p>':"")+
+      '<p class="date">'+escapeHTML(news.date||"")+'</p>'+
+      '</div>';
+
+    newsGrid.prepend(card);
+  });
+}
+showAdminNews();
+</script>
+
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+import{getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged}from"https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+const firebaseConfig={
+  apiKey:"AIzaSyDAAfpIU4onE0irZGe4Bf_2zXDdlDM2e2k",
+  authDomain:"political-barta.firebaseapp.com",
+  projectId:"political-barta",
+  storageBucket:"political-barta.firebasestorage.app",
+  messagingSenderId:"75026811490",
+  appId:"1:75026811490:web:e7a4132f411f4e5c6f1f3b",
+  measurementId:"G-WGND23C2VK"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+
+const loginBox=document.getElementById("loginBox");
+const signupBox=document.getElementById("signupBox");
+const userBox=document.getElementById("userBox");
+const userEmail=document.getElementById("userEmail");
+const loginMessage=document.getElementById("loginMessage");
+const signupMessage=document.getElementById("signupMessage");
+
+function setMessage(el,text,type){
+  el.className="message";
+  el.textContent=text||"";
+  if(type)el.classList.add(type);
+}
+
+document.getElementById("signupBtn").addEventListener("click",async function(){
+  const email=document.getElementById("signupEmail").value.trim();
+  const password=document.getElementById("signupPassword").value;
+
+  setMessage(signupMessage,"");
+
+  if(!email||!password){
+    setMessage(signupMessage,"Email এবং Password দিন।","error");
+    return;
+  }
+
+  if(password.length<6){
+    setMessage(signupMessage,"Password কমপক্ষে ৬ অক্ষরের হতে হবে।","error");
+    return;
+  }
+
+  try{
+    setMessage(signupMessage,"অ্যাকাউন্ট তৈরি হচ্ছে...");
+    await createUserWithEmailAndPassword(auth,email,password);
+    setMessage(signupMessage,"অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে! 🎉","success");
+  }catch(error){
+    console.error("Signup error:",error);
+    const messages={
+      "auth/email-already-in-use":"এই Email দিয়ে আগে থেকেই অ্যাকাউন্ট আছে।",
+      "auth/invalid-email":"Email ঠিকানা সঠিক নয়।",
+      "auth/weak-password":"Password আরও শক্তিশালী দিন।",
+      "auth/operation-not-allowed":"Firebase-এ Email/Password Sign-in চালু করা হয়নি।",
+      "auth/network-request-failed":"ইন্টারনেট সংযোগ পরীক্ষা করুন।"
+    };
+    setMessage(signupMessage,messages[error.code]||("Firebase Error: "+error.code),"error");
+  }
+});
+
+document.getElementById("loginBtn").addEventListener("click",async function(){
+  const email=document.getElementById("loginEmail").value.trim();
+  const password=document.getElementById("loginPassword").value;
+
+  setMessage(loginMessage,"");
+
+  if(!email||!password){
+    setMessage(loginMessage,"Email এবং Password দিন।","error");
+    return;
+  }
+
+  try{
+    setMessage(loginMessage,"Login হচ্ছে...");
+    await signInWithEmailAndPassword(auth,email,password);
+  }catch(error){
+    console.error("Login error:",error);
+    const messages={
+      "auth/invalid-credential":"Email অথবা Password ভুল।",
+      "auth/user-not-found":"এই Email দিয়ে কোনো অ্যাকাউন্ট পাওয়া যায়নি।",
+      "auth/wrong-password":"Password ভুল।",
+      "auth/invalid-email":"Email ঠিকানা সঠিক নয়।",
+      "auth/network-request-failed":"ইন্টারনেট সংযোগ পরীক্ষা করুন।"
+    };
+    setMessage(loginMessage,messages[error.code]||("Firebase Error: "+error.code),"error");
+  }
+});
+
+document.getElementById("logoutBtn").addEventListener("click",async function(){
+  try{
+    await signOut(auth);
+  }catch(error){
+    console.error("Logout error:",error);
+    setMessage(loginMessage,"Logout করা যায়নি।","error");
+  }
+});
+
+onAuthStateChanged(auth,function(user){
+  if(user){
+    loginBox.style.display="none";
+    signupBox.style.display="none";
+    userBox.style.display="block";
+    userEmail.textContent="Logged in as: "+(user.email||"User");
+  }else{
+    userBox.style.display="none";
+
+    if(window.__accountView&&window.__accountView()==="signup"){
+      loginBox.style.display="none";
+      signupBox.style.display="block";
+    }else{
+      loginBox.style.display="block";
+      signupBox.style.display="none";
+    }
+  }
+});
+</script>
+
+
+
+<script>
+/* ================= FULL NEWS PAGE ================= */
+(function(){
+  function getCardData(card){
+    const category=(card.querySelector(".category")||{}).textContent?.trim()||"সংবাদ";
+    const title=(card.querySelector("h2,h3")||{}).textContent?.trim()||"সংবাদ";
+    const date=(card.querySelector(".date")||{}).textContent?.trim()||"";
+    const summary=(card.querySelector(".news-summary,.featured-content p:not(.date)")||{}).textContent?.trim()||"";
+    const imageBox=card.querySelector(".news-image");
+    const icon=imageBox?.querySelector(".news-icon")?.textContent?.trim()||"📰";
+
+    return {category,title,date,summary,icon};
+  }
+
+  function goToArticle(card){
+    if(!card)return;
+
+    const data=getCardData(card);
+
+    /* LocalStorage-এর Admin News হলে পুরো তথ্যও সংরক্ষণ করা হবে */
+    const adminContent=card.querySelector(".news-summary")?.textContent?.trim()||"";
+    const adminImage=card.dataset.adminImage||"";
+
+    try{
+      localStorage.setItem("selectedPoliticalNews",JSON.stringify({
+        category:data.category,
+        title:data.title,
+        date:data.date,
+        content:adminContent||data.summary,
+        image:adminImage,
+        icon:data.icon
+      }));
+    }catch(e){}
+
+    const params=new URLSearchParams({
+      category:data.category,
+      title:data.title,
+      date:data.date,
+      summary:data.summary,
+      icon:data.icon
+    });
+
+    window.location.href="article.html?"+params.toString();
+  }
+
+  document.addEventListener("click",function(e){
+    const card=e.target.closest(".featured-main,.featured-small,.news-card");
+    if(card && !e.target.closest("button,a,input")){
+      goToArticle(card);
+    }
+  });
+
+  document.querySelectorAll(".featured-main,.featured-small,.news-card").forEach(function(card){
+    card.setAttribute("tabindex","0");
+    card.setAttribute("role","button");
+    card.addEventListener("keydown",function(e){
+      if(e.key==="Enter"||e.key===" "){
+        e.preventDefault();
+        goToArticle(card);
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
