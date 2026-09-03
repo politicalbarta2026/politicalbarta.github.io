@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Panel | রাজনৈতিক বার্তা</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#f1f4f6;
+  color:#222;
+}
+
+.header{
+  background:#087f3f;
+  color:white;
+  padding:20px;
+  text-align:center;
+}
+
+.container{
+  max-width:700px;
+  margin:25px auto;
+  padding:0 15px;
+}
+
+.panel{
+  background:white;
+  padding:25px;
+  border-radius:10px;
+  box-shadow:0 3px 12px rgba(0,0,0,.1);
+}
+
+h2{
+  margin-bottom:20px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin:15px 0 7px;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  font-size:16px;
+}
+
+textarea{
+  min-height:180px;
+  resize:vertical;
+}
+
+button{
+  width:100%;
+  margin-top:20px;
+  padding:14px;
+  background:#087f3f;
+  color:white;
+  border:0;
+  border-radius:6px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#065d2e;
+}
+
+.success{
+  margin-top:15px;
+  padding:12px;
+  background:#e7f7ed;
+  color:#087f3f;
+  display:none;
+  border-radius:6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>রাজনৈতিক বার্তা</h1>
+  <p>নিউজ অ্যাডমিন প্যানেল</p>
+</div>
+
+<div class="container">
+
+<div class="panel">
+
+<h2>📝 নতুন খবর যোগ করুন</h2>
+
+<form id="newsForm">
+
+<label>খবরের শিরোনাম</label>
+<input
+  type="text"
+  id="title"
+  placeholder="খবরের শিরোনাম লিখুন"
+  required
+>
+
+<label>ক্যাটাগরি</label>
+
+<select id="category">
+  <option>রাজনীতি</option>
+  <option>জাতীয়</option>
+  <option>আন্তর্জাতিক</option>
+  <option>অর্থনীতি</option>
+  <option>খেলাধুলা</option>
+  <option>বিনোদন</option>
+</select>
+
+<label>ছবির URL</label>
+
+<input
+  type="url"
+  id="image"
+  placeholder="https://example.com/image.jpg"
+>
+
+<label>বিস্তারিত খবর</label>
+
+<textarea
+  id="content"
+  placeholder="এখানে বিস্তারিত খবর লিখুন..."
+  required
+></textarea>
+
+<button type="submit">
+  ➕ খবর সংরক্ষণ করুন
+</button>
+
+<div class="success" id="success">
+  ✅ খবর সফলভাবে সংরক্ষণ হয়েছে!
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+<script>
+
+document.getElementById("newsForm").addEventListener("submit", function(e){
+
+  e.preventDefault();
+
+  const news = {
+    title: document.getElementById("title").value,
+    category: document.getElementById("category").value,
+    image: document.getElementById("image").value,
+    content: document.getElementById("content").value,
+    date: new Date().toLocaleDateString("bn-BD")
+  };
+
+  let newsList =
+    JSON.parse(localStorage.getItem("politicalNews")) || [];
+
+  newsList.unshift(news);
+
+  localStorage.setItem(
+    "politicalNews",
+    JSON.stringify(newsList)
+  );
+
+  document.getElementById("success").style.display="block";
+
+  document.getElementById("newsForm").reset();
+
+});
+
+</script>
+
+</body>
+</html>
