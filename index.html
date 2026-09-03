@@ -20,9 +20,10 @@
       color: #222;
     }
 
-    /* Header */
+    /* ================= HEADER ================= */
+
     header {
-      background: #ffffff;
+      background: #fff;
       border-bottom: 1px solid #ddd;
       position: sticky;
       top: 0;
@@ -73,7 +74,8 @@
       cursor: pointer;
     }
 
-    /* Navigation */
+    /* ================= NAVIGATION ================= */
+
     nav {
       background: #087f3f;
     }
@@ -98,7 +100,8 @@
       background: #065d2e;
     }
 
-    /* Breaking News */
+    /* ================= BREAKING ================= */
+
     .breaking {
       max-width: 1200px;
       margin: 15px auto;
@@ -122,8 +125,9 @@
       border: 1px solid #ddd;
     }
 
-    /* Main */
-    .container {
+    /* ================= MAIN ================= */
+
+    .news-container {
       max-width: 1200px;
       margin: auto;
       padding: 0 20px 40px;
@@ -136,7 +140,8 @@
       margin: 25px 0 15px;
     }
 
-    /* Featured News */
+    /* ================= FEATURED ================= */
+
     .featured {
       display: grid;
       grid-template-columns: 2fr 1fr;
@@ -188,7 +193,8 @@
       line-height: 1.4;
     }
 
-    /* News Grid */
+    /* ================= NEWS GRID ================= */
+
     .news-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -237,7 +243,124 @@
       font-size: 13px;
     }
 
-    /* Footer */
+    /* ================= LOGIN AREA ================= */
+
+    .account-section {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .account-box {
+      width: 100%;
+      max-width: 420px;
+      margin: auto;
+      background: white;
+      padding: 30px 25px;
+      border-radius: 18px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+
+    .account-logo {
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      color: #087f3f;
+      margin-bottom: 8px;
+    }
+
+    .account-subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    .account-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .account-box input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .account-box input:focus {
+      border-color: #1877f2;
+    }
+
+    .account-box button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    .login-btn {
+      background: #1877f2;
+      color: white;
+    }
+
+    .signup-btn {
+      background: #42b72a;
+      color: white;
+    }
+
+    .logout-btn {
+      background: #e53935;
+      color: white;
+    }
+
+    .switch {
+      text-align: center;
+      margin-top: 18px;
+      color: #1877f2;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      min-height: 20px;
+      line-height: 1.5;
+    }
+
+    .error {
+      color: #d60000;
+    }
+
+    .success {
+      color: #087f3f;
+    }
+
+    .user-box {
+      display: none;
+      text-align: center;
+    }
+
+    .user-email {
+      margin: 15px 0;
+      color: #444;
+      word-break: break-word;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* ================= FOOTER ================= */
+
     footer {
       background: #111;
       color: white;
@@ -251,7 +374,8 @@
       margin-bottom: 10px;
     }
 
-    /* Mobile */
+    /* ================= MOBILE ================= */
+
     @media (max-width: 768px) {
 
       .top-header {
@@ -288,8 +412,12 @@
         padding: 0 10px;
       }
 
-      .container {
+      .news-container {
         padding: 0 10px 30px;
+      }
+
+      .account-section {
+        padding: 0 10px;
       }
     }
   </style>
@@ -297,18 +425,31 @@
 
 <body>
 
+<!-- =====================================================
+     NEWS WEBSITE
+===================================================== -->
+
 <header>
 
   <div class="top-header">
 
     <div>
       <div class="logo">রাজনৈতিক বার্তা</div>
-      <div class="tagline">বাংলাদেশের রাজনৈতিক খবর ও সংবাদ</div>
+      <div class="tagline">
+        বাংলাদেশের রাজনৈতিক খবর ও সংবাদ
+      </div>
     </div>
 
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="খবর খুঁজুন...">
-      <button onclick="searchNews()">খুঁজুন</button>
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="খবর খুঁজুন..."
+      >
+
+      <button onclick="searchNews()">
+        খুঁজুন
+      </button>
     </div>
 
   </div>
@@ -329,8 +470,6 @@
 </header>
 
 
-<!-- Breaking News -->
-
 <div class="breaking">
 
   <div class="breaking-title">
@@ -344,28 +483,34 @@
 </div>
 
 
-<main class="container">
+<main class="news-container">
 
-  <h2 class="section-title">সর্বশেষ খবর</h2>
-
-  <!-- Featured -->
+  <h2 class="section-title">
+    সর্বশেষ খবর
+  </h2>
 
   <div class="featured">
 
     <div class="featured-main">
 
-      <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1200&q=80"
-           alt="রাজনীতি">
+      <img
+        src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1200&q=80"
+        alt="রাজনীতি"
+      >
 
       <div class="featured-content">
 
-        <span class="category">রাজনীতি</span>
+        <span class="category">
+          রাজনীতি
+        </span>
 
         <h2>
           বাংলাদেশের রাজনীতিতে নতুন আলোচনা, নজর সবার পরবর্তী ঘটনাপ্রবাহে
         </h2>
 
-        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+        <p class="date">
+          ৩ সেপ্টেম্বর ২০২৬
+        </p>
 
       </div>
 
@@ -376,11 +521,21 @@
 
       <div class="featured-small">
 
-        <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=500&q=80">
+        <img
+          src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=500&q=80"
+          alt="জাতীয় খবর"
+        >
 
         <div class="featured-small-content">
-          <span class="category">জাতীয়</span>
-          <h3>দেশের গুরুত্বপূর্ণ বিষয়ে নতুন আলোচনা</h3>
+
+          <span class="category">
+            জাতীয়
+          </span>
+
+          <h3>
+            দেশের গুরুত্বপূর্ণ বিষয়ে নতুন আলোচনা
+          </h3>
+
         </div>
 
       </div>
@@ -388,11 +543,21 @@
 
       <div class="featured-small">
 
-        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=500&q=80">
+        <img
+          src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=500&q=80"
+          alt="সংবাদ"
+        >
 
         <div class="featured-small-content">
-          <span class="category">সংবাদ</span>
-          <h3>সর্বশেষ খবর ও আপডেট দেখুন</h3>
+
+          <span class="category">
+            সংবাদ
+          </span>
+
+          <h3>
+            সর্বশেষ খবর ও আপডেট দেখুন
+          </h3>
+
         </div>
 
       </div>
@@ -402,21 +567,33 @@
   </div>
 
 
-  <h2 class="section-title">জনপ্রিয় খবর</h2>
+  <h2 class="section-title">
+    জনপ্রিয় খবর
+  </h2>
+
 
   <div class="news-grid" id="newsGrid">
 
     <article class="news-card">
 
-      <img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=800&q=80">
+      <img
+        src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=800&q=80"
+        alt="রাজনীতি"
+      >
 
       <div class="news-content">
 
-        <span class="category">রাজনীতি</span>
+        <span class="category">
+          রাজনীতি
+        </span>
 
-        <h3>রাজনৈতিক অঙ্গনে গুরুত্বপূর্ণ আলোচনা চলছে</h3>
+        <h3>
+          রাজনৈতিক অঙ্গনে গুরুত্বপূর্ণ আলোচনা চলছে
+        </h3>
 
-        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+        <p class="date">
+          ৩ সেপ্টেম্বর ২০২৬
+        </p>
 
       </div>
 
@@ -425,15 +602,24 @@
 
     <article class="news-card">
 
-      <img src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=800&q=80">
+      <img
+        src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=800&q=80"
+        alt="জাতীয়"
+      >
 
       <div class="news-content">
 
-        <span class="category">জাতীয়</span>
+        <span class="category">
+          জাতীয়
+        </span>
 
-        <h3>জাতীয় পর্যায়ে নতুন সিদ্ধান্ত নিয়ে আলোচনা</h3>
+        <h3>
+          জাতীয় পর্যায়ে নতুন সিদ্ধান্ত নিয়ে আলোচনা
+        </h3>
 
-        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+        <p class="date">
+          ৩ সেপ্টেম্বর ২০২৬
+        </p>
 
       </div>
 
@@ -442,15 +628,24 @@
 
     <article class="news-card">
 
-      <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80">
+      <img
+        src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80"
+        alt="অর্থনীতি"
+      >
 
       <div class="news-content">
 
-        <span class="category">অর্থনীতি</span>
+        <span class="category">
+          অর্থনীতি
+        </span>
 
-        <h3>অর্থনীতি নিয়ে বিশেষজ্ঞদের নতুন মতামত</h3>
+        <h3>
+          অর্থনীতি নিয়ে বিশেষজ্ঞদের নতুন মতামত
+        </h3>
 
-        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+        <p class="date">
+          ৩ সেপ্টেম্বর ২০২৬
+        </p>
 
       </div>
 
@@ -459,15 +654,24 @@
 
     <article class="news-card">
 
-      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80">
+      <img
+        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
+        alt="আন্তর্জাতিক"
+      >
 
       <div class="news-content">
 
-        <span class="category">আন্তর্জাতিক</span>
+        <span class="category">
+          আন্তর্জাতিক
+        </span>
 
-        <h3>আন্তর্জাতিক অঙ্গনের গুরুত্বপূর্ণ খবর</h3>
+        <h3>
+          আন্তর্জাতিক অঙ্গনের গুরুত্বপূর্ণ খবর
+        </h3>
 
-        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+        <p class="date">
+          ৩ সেপ্টেম্বর ২০২৬
+        </p>
 
       </div>
 
@@ -476,15 +680,24 @@
 
     <article class="news-card">
 
-      <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80">
+      <img
+        src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80"
+        alt="খেলাধুলা"
+      >
 
       <div class="news-content">
 
-        <span class="category">খেলাধুলা</span>
+        <span class="category">
+          খেলাধুলা
+        </span>
 
-        <h3>খেলার মাঠে আজকের গুরুত্বপূর্ণ আপডেট</h3>
+        <h3>
+          খেলার মাঠে আজকের গুরুত্বপূর্ণ আপডেট
+        </h3>
 
-        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+        <p class="date">
+          ৩ সেপ্টেম্বর ২০২৬
+        </p>
 
       </div>
 
@@ -493,15 +706,24 @@
 
     <article class="news-card">
 
-      <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=800&q=80">
+      <img
+        src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=800&q=80"
+        alt="বিনোদন"
+      >
 
       <div class="news-content">
 
-        <span class="category">বিনোদন</span>
+        <span class="category">
+          বিনোদন
+        </span>
 
-        <h3>বিনোদন জগতের নতুন খবর</h3>
+        <h3>
+          বিনোদন জগতের নতুন খবর
+        </h3>
 
-        <p class="date">৩ সেপ্টেম্বর ২০২৬</p>
+        <p class="date">
+          ৩ সেপ্টেম্বর ২০২৬
+        </p>
 
       </div>
 
@@ -512,307 +734,157 @@
 </main>
 
 
-<footer>
+<!-- =====================================================
+     LOGIN / SIGN UP
+===================================================== -->
 
-  <h2>রাজনৈতিক বার্তা</h2>
+<section class="account-section">
 
-  <p>বাংলাদেশের রাজনৈতিক খবর ও সংবাদ</p>
+  <div class="account-box">
 
-  <br>
-
-  <p>© ২০২৬ রাজনৈতিক বার্তা — সর্বস্বত্ব সংরক্ষিত</p>
-
-</footer>
-
-
-<script>
-
-function searchNews() {
-  const input = document
-    .getElementById("searchInput")
-    .value
-    .toLowerCase();
-
-  const cards = document.querySelectorAll(".news-card");
-
-  cards.forEach(card => {
-    const text = card.innerText.toLowerCase();
-
-    if (text.includes(input)) {
-      card.style.display = "";
-    } else {
-      card.style.display = "none";
-    }
-  });
-}
-
-
-/* Admin Panel থেকে সংরক্ষিত খবর দেখানো */
-
-function showAdminNews() {
-
-  const newsList =
-    JSON.parse(localStorage.getItem("politicalNews")) || [];
-
-  const newsGrid = document.getElementById("newsGrid");
-
-  if (newsList.length === 0) {
-    return;
-  }
-
-  newsList.forEach(news => {
-
-    const card = document.createElement("article");
-
-    card.className = "news-card";
-
-    card.innerHTML = `
-      ${
-        news.image
-        ? `<img src="${news.image}" alt="${news.title}">`
-        : ""
-      }
-
-      <div class="news-content">
-
-        <span class="category">
-          ${news.category}
-        </span>
-
-        <h3>
-          ${news.title}
-        </h3>
-
-        <p>${news.content}</p>
-
-        <p class="date">
-          ${news.date}
-        </p>
-
-      </div>
-    `;
-
-    newsGrid.prepend(card);
-
-  });
-
-}
-
-
-/* পেজ চালু হলে খবর দেখাবে */
-showAdminNews();
-
-</script>
-
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Political Barta - Login</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #f1f3f6;
-      padding: 20px;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 420px;
-      background: white;
-      padding: 30px 25px;
-      border-radius: 18px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    }
-
-    .logo {
-      text-align: center;
-      font-size: 32px;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-
-    .subtitle {
-      text-align: center;
-      color: #666;
-      margin-bottom: 25px;
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    input {
-      width: 100%;
-      padding: 14px;
-      margin-bottom: 12px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      font-size: 16px;
-      outline: none;
-    }
-
-    input:focus {
-      border-color: #1877f2;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 5px;
-    }
-
-    .login-btn {
-      background: #1877f2;
-      color: white;
-    }
-
-    .signup-btn {
-      background: #42b72a;
-      color: white;
-    }
-
-    .logout-btn {
-      background: #e53935;
-      color: white;
-    }
-
-    .switch {
-      text-align: center;
-      margin-top: 18px;
-      color: #1877f2;
-      cursor: pointer;
-    }
-
-    .message {
-      text-align: center;
-      margin-top: 15px;
-      font-size: 14px;
-      min-height: 20px;
-    }
-
-    .user-box {
-      display: none;
-      text-align: center;
-    }
-
-    .user-email {
-      margin: 15px 0;
-      color: #444;
-      word-break: break-word;
-    }
-
-    .hidden {
-      display: none;
-    }
-  </style>
-</head>
-
-<body>
-
-  <div class="container">
 
     <!-- LOGIN -->
+
     <div id="loginBox">
 
-      <div class="logo">Political Barta</div>
+      <div class="account-logo">
+        Political Barta
+      </div>
 
-      <div class="subtitle">
+      <div class="account-subtitle">
         আপনার অ্যাকাউন্টে লগইন করুন
       </div>
 
-      <h2>Login</h2>
+      <h2>
+        Login
+      </h2>
+
 
       <input
         type="email"
         id="loginEmail"
         placeholder="Email"
+        autocomplete="email"
       >
+
 
       <input
         type="password"
         id="loginPassword"
         placeholder="Password"
+        autocomplete="current-password"
       >
 
-      <button class="login-btn" id="loginBtn">
+
+      <button
+        class="login-btn"
+        id="loginBtn"
+      >
         Login
       </button>
 
-      <div class="switch" id="showSignup">
+
+      <div
+        class="switch"
+        id="showSignup"
+      >
         নতুন অ্যাকাউন্ট তৈরি করুন
       </div>
 
-      <div class="message" id="loginMessage"></div>
+
+      <div
+        class="message"
+        id="loginMessage"
+      ></div>
 
     </div>
 
 
     <!-- SIGN UP -->
-    <div id="signupBox" class="hidden">
 
-      <div class="logo">Political Barta</div>
+    <div
+      id="signupBox"
+      class="hidden"
+    >
 
-      <div class="subtitle">
+      <div class="account-logo">
+        Political Barta
+      </div>
+
+      <div class="account-subtitle">
         নতুন অ্যাকাউন্ট তৈরি করুন
       </div>
 
-      <h2>Sign Up</h2>
+      <h2>
+        Sign Up
+      </h2>
+
 
       <input
         type="email"
         id="signupEmail"
         placeholder="Email"
+        autocomplete="email"
       >
+
 
       <input
         type="password"
         id="signupPassword"
         placeholder="Password"
+        autocomplete="new-password"
       >
 
-      <button class="signup-btn" id="signupBtn">
+
+      <button
+        class="signup-btn"
+        id="signupBtn"
+      >
         Create Account
       </button>
 
-      <div class="switch" id="showLogin">
+
+      <div
+        class="switch"
+        id="showLogin"
+      >
         আগে থেকেই অ্যাকাউন্ট আছে? Login
       </div>
 
-      <div class="message" id="signupMessage"></div>
+
+      <div
+        class="message"
+        id="signupMessage"
+      ></div>
 
     </div>
 
 
-    <!-- USER AREA -->
-    <div id="userBox" class="user-box">
+    <!-- USER -->
 
-      <div class="logo">Political Barta</div>
+    <div
+      id="userBox"
+      class="user-box"
+    >
 
-      <h2>স্বাগতম! 🎉</h2>
+      <div class="account-logo">
+        Political Barta
+      </div>
 
-      <p class="user-email" id="userEmail"></p>
+      <h2>
+        স্বাগতম! 🎉
+      </h2>
 
-      <button class="logout-btn" id="logoutBtn">
+      <p
+        class="user-email"
+        id="userEmail"
+      ></p>
+
+
+      <button
+        class="logout-btn"
+        id="logoutBtn"
+      >
         Logout
       </button>
 
@@ -820,235 +892,577 @@ showAdminNews();
 
   </div>
 
-
-  <!-- FIREBASE -->
-
-  <script type="module">
-
-    import { initializeApp }
-      from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-
-    import {
-      getAuth,
-      createUserWithEmailAndPassword,
-      signInWithEmailAndPassword,
-      signOut,
-      onAuthStateChanged
-    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+</section>
 
 
-    const firebaseConfig = {
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
-      apiKey: "AIzaSyDAAfpIU4onE0irZGe4Bf_2zXDdlDM2e2k",
+<footer>
 
-      authDomain: "political-barta.firebaseapp.com",
+  <h2>
+    রাজনৈতিক বার্তা
+  </h2>
 
-      projectId: "political-barta",
+  <p>
+    বাংলাদেশের রাজনৈতিক খবর ও সংবাদ
+  </p>
 
-      storageBucket: "political-barta.firebasestorage.app",
+  <br>
 
-      messagingSenderId: "75026811490",
+  <p>
+    © ২০২৬ রাজনৈতিক বার্তা — সর্বস্বত্ব সংরক্ষিত
+  </p>
 
-      appId: "1:75026811490:web:e7a4132f411f4e5c6f1f3b",
-
-      measurementId: "G-WGND23C2VK"
-
-    };
-
-
-    const app = initializeApp(firebaseConfig);
-
-    const auth = getAuth(app);
-
-
-    // ELEMENTS
-
-    const loginBox = document.getElementById("loginBox");
-
-    const signupBox = document.getElementById("signupBox");
-
-    const userBox = document.getElementById("userBox");
-
-    const userEmail = document.getElementById("userEmail");
+</footer>
 
 
-    // SHOW SIGNUP
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
 
-    document
-      .getElementById("showSignup")
-      .addEventListener("click", () => {
+<script>
 
-        loginBox.classList.add("hidden");
+  /* ================= SEARCH ================= */
 
-        signupBox.classList.remove("hidden");
+  function searchNews() {
 
-      });
+    const input =
+      document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
 
+    const cards =
+      document.querySelectorAll(".news-card");
 
-    // SHOW LOGIN
+    cards.forEach(card => {
 
-    document
-      .getElementById("showLogin")
-      .addEventListener("click", () => {
+      const text =
+        card.innerText.toLowerCase();
 
-        signupBox.classList.add("hidden");
+      if (text.includes(input)) {
 
-        loginBox.classList.remove("hidden");
+        card.style.display = "";
 
-      });
+      } else {
 
+        card.style.display = "none";
 
-    // SIGN UP
+      }
 
-    document
-      .getElementById("signupBtn")
-      .addEventListener("click", async () => {
+    });
 
-        const email =
-          document.getElementById("signupEmail").value.trim();
-
-        const password =
-          document.getElementById("signupPassword").value;
-
-
-        const message =
-          document.getElementById("signupMessage");
+  }
 
 
-        if (!email || !password) {
+  /* ================= ADMIN NEWS ================= */
 
-          message.textContent =
-            "Email এবং Password দিন।";
+  function showAdminNews() {
 
-          return;
+    const newsList =
+      JSON.parse(
+        localStorage.getItem("politicalNews")
+      ) || [];
 
+    const newsGrid =
+      document.getElementById("newsGrid");
+
+    if (newsList.length === 0) {
+      return;
+    }
+
+    newsList.forEach(news => {
+
+      const card =
+        document.createElement("article");
+
+      card.className = "news-card";
+
+      card.innerHTML = `
+
+        ${
+          news.image
+          ? `
+            <img
+              src="${news.image}"
+              alt="${news.title}"
+            >
+          `
+          : ""
         }
 
+        <div class="news-content">
 
-        if (password.length < 6) {
+          <span class="category">
+            ${news.category || "সংবাদ"}
+          </span>
 
-          message.textContent =
-            "Password কমপক্ষে ৬ অক্ষরের হতে হবে।";
+          <h3>
+            ${news.title || ""}
+          </h3>
 
-          return;
+          <p>
+            ${news.content || ""}
+          </p>
 
-        }
+          <p class="date">
+            ${news.date || ""}
+          </p>
+
+        </div>
+
+      `;
+
+      newsGrid.prepend(card);
+
+    });
+
+  }
 
 
-        try {
+  showAdminNews();
 
+</script>
+
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script type="module">
+
+  import {
+    initializeApp
+  }
+  from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+  }
+  from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+  /* ================= FIREBASE CONFIG ================= */
+
+  const firebaseConfig = {
+
+    apiKey:
+      "AIzaSyDAAfpIU4onE0irZGe4Bf_2zXDdlDM2e2k",
+
+    authDomain:
+      "political-barta.firebaseapp.com",
+
+    projectId:
+      "political-barta",
+
+    storageBucket:
+      "political-barta.firebasestorage.app",
+
+    messagingSenderId:
+      "75026811490",
+
+    appId:
+      "1:75026811490:web:e7a4132f411f4e5c6f1f3b",
+
+    measurementId:
+      "G-WGND23C2VK"
+
+  };
+
+
+  /* ================= START FIREBASE ================= */
+
+  const app =
+    initializeApp(firebaseConfig);
+
+  const auth =
+    getAuth(app);
+
+
+  /* ================= ELEMENTS ================= */
+
+  const loginBox =
+    document.getElementById("loginBox");
+
+  const signupBox =
+    document.getElementById("signupBox");
+
+  const userBox =
+    document.getElementById("userBox");
+
+  const userEmail =
+    document.getElementById("userEmail");
+
+
+  const loginMessage =
+    document.getElementById("loginMessage");
+
+  const signupMessage =
+    document.getElementById("signupMessage");
+
+
+  /* ================= SHOW SIGNUP ================= */
+
+  document
+    .getElementById("showSignup")
+    .addEventListener("click", function () {
+
+      loginBox.classList.add("hidden");
+
+      signupBox.classList.remove("hidden");
+
+      loginMessage.textContent = "";
+
+      signupMessage.textContent = "";
+
+    });
+
+
+  /* ================= SHOW LOGIN ================= */
+
+  document
+    .getElementById("showLogin")
+    .addEventListener("click", function () {
+
+      signupBox.classList.add("hidden");
+
+      loginBox.classList.remove("hidden");
+
+      loginMessage.textContent = "";
+
+      signupMessage.textContent = "";
+
+    });
+
+
+  /* ================= SIGN UP ================= */
+
+  document
+    .getElementById("signupBtn")
+    .addEventListener("click", async function () {
+
+      const email =
+        document
+          .getElementById("signupEmail")
+          .value
+          .trim();
+
+      const password =
+        document
+          .getElementById("signupPassword")
+          .value;
+
+
+      signupMessage.className = "message";
+
+
+      /* Empty */
+
+      if (!email || !password) {
+
+        signupMessage.textContent =
+          "Email এবং Password দিন।";
+
+        signupMessage.classList.add("error");
+
+        return;
+
+      }
+
+
+      /* Password */
+
+      if (password.length < 6) {
+
+        signupMessage.textContent =
+          "Password কমপক্ষে ৬ অক্ষরের হতে হবে।";
+
+        signupMessage.classList.add("error");
+
+        return;
+
+      }
+
+
+      /* Firebase */
+
+      try {
+
+        signupMessage.textContent =
+          "অ্যাকাউন্ট তৈরি হচ্ছে...";
+
+
+        const userCredential =
           await createUserWithEmailAndPassword(
             auth,
             email,
             password
           );
 
-          message.textContent =
-            "অ্যাকাউন্ট তৈরি হয়েছে!";
 
-        }
+        signupMessage.textContent =
+          "অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে! 🎉";
 
-        catch (error) {
-
-          message.textContent =
-            error.message;
-
-        }
-
-      });
+        signupMessage.classList.add("success");
 
 
-    // LOGIN
+        console.log(
+          "Account created:",
+          userCredential.user.email
+        );
 
-    document
-      .getElementById("loginBtn")
-      .addEventListener("click", async () => {
-
-        const email =
-          document.getElementById("loginEmail").value.trim();
-
-        const password =
-          document.getElementById("loginPassword").value;
-
-
-        const message =
-          document.getElementById("loginMessage");
-
-
-        if (!email || !password) {
-
-          message.textContent =
-            "Email এবং Password দিন।";
-
-          return;
-
-        }
-
-
-        try {
-
-          await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-          );
-
-          message.textContent =
-            "Login সফল হয়েছে!";
-
-        }
-
-        catch (error) {
-
-          message.textContent =
-            "Login ব্যর্থ: " + error.message;
-
-        }
-
-      });
-
-
-    // LOGOUT
-
-    document
-      .getElementById("logoutBtn")
-      .addEventListener("click", async () => {
-
-        await signOut(auth);
-
-      });
-
-
-    // AUTH STATE
-
-    onAuthStateChanged(auth, (user) => {
-
-      if (user) {
-
-        loginBox.style.display = "none";
-
-        signupBox.style.display = "none";
-
-        userBox.style.display = "block";
-
-        userEmail.textContent =
-          "Logged in as: " + user.email;
 
       }
 
-      else {
+      catch (error) {
 
-        loginBox.style.display = "block";
+        console.error(error);
 
-        signupBox.style.display = "none";
 
-        userBox.style.display = "none";
+        let message =
+          "অ্যাকাউন্ট তৈরি করা যায়নি।";
+
+
+        if (
+          error.code ===
+          "auth/email-already-in-use"
+        ) {
+
+          message =
+            "এই Email দিয়ে আগে থেকেই অ্যাকাউন্ট আছে।";
+
+        }
+
+        else if (
+          error.code ===
+          "auth/invalid-email"
+        ) {
+
+          message =
+            "Email ঠিকানা সঠিক নয়।";
+
+        }
+
+        else if (
+          error.code ===
+          "auth/weak-password"
+        ) {
+
+          message =
+            "Password আরও শক্তিশালী দিন।";
+
+        }
+
+        else if (
+          error.code ===
+          "auth/operation-not-allowed"
+        ) {
+
+          message =
+            "Firebase Email/Password Login চালু করা হয়নি।";
+
+        }
+
+        else {
+
+          message =
+            "Firebase Error: " +
+            error.code;
+
+        }
+
+
+        signupMessage.textContent =
+          message;
+
+        signupMessage.classList.add("error");
 
       }
 
     });
 
-  </script>
+
+  /* ================= LOGIN ================= */
+
+  document
+    .getElementById("loginBtn")
+    .addEventListener("click", async function () {
+
+      const email =
+        document
+          .getElementById("loginEmail")
+          .value
+          .trim();
+
+      const password =
+        document
+          .getElementById("loginPassword")
+          .value;
+
+
+      loginMessage.className = "message";
+
+
+      if (!email || !password) {
+
+        loginMessage.textContent =
+          "Email এবং Password দিন।";
+
+        loginMessage.classList.add("error");
+
+        return;
+
+      }
+
+
+      try {
+
+        loginMessage.textContent =
+          "Login হচ্ছে...";
+
+
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+
+        loginMessage.textContent =
+          "Login সফল হয়েছে! 🎉";
+
+        loginMessage.classList.add("success");
+
+      }
+
+
+      catch (error) {
+
+        console.error(error);
+
+
+        let message =
+          "Login ব্যর্থ।";
+
+
+        if (
+          error.code ===
+          "auth/invalid-credential"
+        ) {
+
+          message =
+            "Email অথবা Password ভুল।";
+
+        }
+
+        else if (
+          error.code ===
+          "auth/user-not-found"
+        ) {
+
+          message =
+            "এই Email দিয়ে কোনো অ্যাকাউন্ট পাওয়া যায়নি।";
+
+        }
+
+        else if (
+          error.code ===
+          "auth/wrong-password"
+        ) {
+
+          message =
+            "Password ভুল।";
+
+        }
+
+        else if (
+          error.code ===
+          "auth/invalid-email"
+        ) {
+
+          message =
+            "Email ঠিকানা সঠিক নয়।";
+
+        }
+
+        else {
+
+          message =
+            "Firebase Error: " +
+            error.code;
+
+        }
+
+
+        loginMessage.textContent =
+          message;
+
+        loginMessage.classList.add("error");
+
+      }
+
+    });
+
+
+  /* ================= LOGOUT ================= */
+
+  document
+    .getElementById("logoutBtn")
+    .addEventListener("click", async function () {
+
+      try {
+
+        await signOut(auth);
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+      }
+
+    });
+
+
+  /* ================= AUTH STATE ================= */
+
+  onAuthStateChanged(auth, function (user) {
+
+    if (user) {
+
+      loginBox.style.display = "none";
+
+      signupBox.style.display = "none";
+
+      userBox.style.display = "block";
+
+      userEmail.textContent =
+        "Logged in as: " + user.email;
+
+    }
+
+    else {
+
+      loginBox.style.display = "block";
+
+      signupBox.style.display = "none";
+
+      userBox.style.display = "none";
+
+    }
+
+  });
+
+</script>
 
 </body>
 </html>
