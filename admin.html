@@ -2,189 +2,98 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Admin Panel | রাজনৈতিক বার্তা</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Admin | রাজনৈতিক বার্তা</title>
+<meta name="theme-color" content="#087f3f">
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-body{
-  font-family:Arial,"Noto Sans Bengali",sans-serif;
-  background:#f1f4f6;
-  color:#222;
-}
-
-.header{
-  background:#087f3f;
-  color:white;
-  padding:20px;
-  text-align:center;
-}
-
-.container{
-  max-width:700px;
-  margin:25px auto;
-  padding:0 15px;
-}
-
-.panel{
-  background:white;
-  padding:25px;
-  border-radius:10px;
-  box-shadow:0 3px 12px rgba(0,0,0,.1);
-}
-
-h2{
-  margin-bottom:20px;
-}
-
-label{
-  display:block;
-  font-weight:bold;
-  margin:15px 0 7px;
-}
-
-input,select,textarea{
-  width:100%;
-  padding:13px;
-  border:1px solid #ccc;
-  border-radius:6px;
-  font-size:16px;
-}
-
-textarea{
-  min-height:180px;
-  resize:vertical;
-}
-
-button{
-  width:100%;
-  margin-top:20px;
-  padding:14px;
-  background:#087f3f;
-  color:white;
-  border:0;
-  border-radius:6px;
-  font-size:17px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-button:hover{
-  background:#065d2e;
-}
-
-.success{
-  margin-top:15px;
-  padding:12px;
-  background:#e7f7ed;
-  color:#087f3f;
-  display:none;
-  border-radius:6px;
-}
+*{box-sizing:border-box}body{margin:0;background:#f3f5f7;color:#222;font-family:Arial,"Noto Sans Bengali",sans-serif}.wrap{max-width:850px;margin:auto;padding:18px}.top{background:#087f3f;color:#fff;padding:18px;border-radius:12px;margin-bottom:18px}.top h1{margin:0;font-size:25px}.card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.08);margin-bottom:18px}label{display:block;font-weight:700;margin:12px 0 6px}input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;font:inherit}textarea{min-height:160px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.btn{border:0;border-radius:8px;padding:12px 18px;background:#087f3f;color:#fff;font-weight:700;margin-top:15px}.btn.secondary{background:#555}.btn.danger{background:#c62828}.msg{margin-top:10px;font-weight:700}.hint{font-size:13px;color:#777;margin-top:6px;line-height:1.6}.preview{display:none;margin-top:12px;max-height:260px;width:100%;object-fit:cover;border-radius:10px}.news-item{border:1px solid #ddd;border-radius:10px;padding:12px;margin-top:10px}.news-item img{width:100%;max-height:180px;object-fit:cover;border-radius:8px;margin-top:8px}.news-item h3{margin:5px 0}.small{font-size:13px;color:#777}@media(max-width:600px){.row{grid-template-columns:1fr}.wrap{padding:10px}.card{padding:16px}}
 </style>
 </head>
-
 <body>
+<div class="wrap">
+  <div class="top"><h1>রাজনৈতিক বার্তা — Admin Panel</h1><div>নিউজ প্রকাশ ও ছবি যোগ করুন</div></div>
 
-<div class="header">
-  <h1>রাজনৈতিক বার্তা</h1>
-  <p>নিউজ অ্যাডমিন প্যানেল</p>
+  <section class="card" id="loginCard">
+    <h2>Admin Login</h2>
+    <label>Email</label><input id="email" type="email" placeholder="আপনার Email">
+    <label>Password</label><input id="password" type="password" placeholder="Password">
+    <button class="btn" id="loginBtn">Login</button>
+    <div class="msg" id="loginMsg"></div>
+  </section>
+
+  <section class="card" id="panel" style="display:none">
+    <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap">
+      <h2 style="margin:0">নতুন নিউজ প্রকাশ</h2>
+      <button class="btn secondary" id="logoutBtn" style="margin-top:0">Logout</button>
+    </div>
+
+    <label>নিউজের শিরোনাম</label>
+    <input id="title" placeholder="নিউজের শিরোনাম লিখুন">
+
+    <div class="row">
+      <div><label>ক্যাটাগরি</label><select id="category"><option>রাজনীতি</option><option>জাতীয়</option><option>আন্তর্জাতিক</option><option>অর্থনীতি</option><option>খেলাধুলা</option><option>বিনোদন</option><option>মতামত</option></select></div>
+      <div><label>তারিখ</label><input id="date" type="date"></div>
+    </div>
+
+    <label>নিউজের বিস্তারিত</label>
+    <textarea id="content" placeholder="নিউজের বিস্তারিত লিখুন..."></textarea>
+
+    <label>আসল ছবি — ফোন থেকে নির্বাচন করুন</label>
+    <input id="imageFile" type="file" accept="image/*">
+    <div class="hint">ফোনের Gallery থেকে ছবি বেছে নিন। ছবি স্বয়ংক্রিয়ভাবে ছোট/কমপ্রেস হয়ে সাইটে ব্যবহার হবে।</div>
+    <img id="preview" class="preview" alt="ছবির preview">
+
+    <label>অথবা ছবির URL দিন</label>
+    <input id="imageUrl" type="url" placeholder="https://...jpg">
+    <div class="hint">URL দিলে সেটিই ব্যবহার হবে।</div>
+
+    <button class="btn" id="publishBtn">নিউজ প্রকাশ করুন</button>
+    <div class="msg" id="publishMsg"></div>
+  </section>
+
+  <section class="card" id="listCard" style="display:none">
+    <h2>প্রকাশিত নিউজ</h2>
+    <div id="list"></div>
+  </section>
 </div>
 
-<div class="container">
-
-<div class="panel">
-
-<h2>📝 নতুন খবর যোগ করুন</h2>
-
-<form id="newsForm">
-
-<label>খবরের শিরোনাম</label>
-<input
-  type="text"
-  id="title"
-  placeholder="খবরের শিরোনাম লিখুন"
-  required
->
-
-<label>ক্যাটাগরি</label>
-
-<select id="category">
-  <option>রাজনীতি</option>
-  <option>জাতীয়</option>
-  <option>আন্তর্জাতিক</option>
-  <option>অর্থনীতি</option>
-  <option>খেলাধুলা</option>
-  <option>বিনোদন</option>
-</select>
-
-<label>ছবির URL</label>
-
-<input
-  type="url"
-  id="image"
-  placeholder="https://example.com/image.jpg"
->
-
-<label>বিস্তারিত খবর</label>
-
-<textarea
-  id="content"
-  placeholder="এখানে বিস্তারিত খবর লিখুন..."
-  required
-></textarea>
-
-<button type="submit">
-  ➕ খবর সংরক্ষণ করুন
-</button>
-
-<div class="success" id="success">
-  ✅ খবর সফলভাবে সংরক্ষণ হয়েছে!
-</div>
-
-</form>
-
-</div>
-
-</div>
-
-<script>
-
-document.getElementById("newsForm").addEventListener("submit", function(e){
-
-  e.preventDefault();
-
-  const news = {
-    title: document.getElementById("title").value,
-    category: document.getElementById("category").value,
-    image: document.getElementById("image").value,
-    content: document.getElementById("content").value,
-    date: new Date().toLocaleDateString("bn-BD")
-  };
-
-  let newsList =
-    JSON.parse(localStorage.getItem("politicalNews")) || [];
-
-  newsList.unshift(news);
-
-  localStorage.setItem(
-    "politicalNews",
-    JSON.stringify(newsList)
-  );
-
-  document.getElementById("success").style.display="block";
-
-  document.getElementById("newsForm").reset();
-
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+import{getAuth,signInWithEmailAndPassword,signOut,onAuthStateChanged}from"https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+const firebaseConfig={apiKey:"AIzaSyDAAfpIU4onE0irZGe4Bf_2zXDdlDM2e2k",authDomain:"political-barta.firebaseapp.com",projectId:"political-barta",storageBucket:"political-barta.firebasestorage.app",messagingSenderId:"75026811490",appId:"1:75026811490:web:e7a4132f411f4e5c6f1f3b",measurementId:"G-WGND23C2VK"};
+const app=initializeApp(firebaseConfig),auth=getAuth(app);
+const $=id=>document.getElementById(id);
+let selectedImage="";
+function msg(el,text,error=false){el.textContent=text;el.style.color=error?"#c62828":"#087f3f"}
+function today(){const d=new Date();return d.toISOString().slice(0,10)}
+$("date").value=today();
+$("imageFile").addEventListener("change",()=>{
+ const file=$("imageFile").files[0]; if(!file)return;
+ const reader=new FileReader(); reader.onload=e=>{
+   const img=new Image(); img.onload=()=>{
+     const max=1200,scale=Math.min(1,max/Math.max(img.width,img.height));
+     const c=document.createElement("canvas");c.width=Math.round(img.width*scale);c.height=Math.round(img.height*scale);
+     c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+     selectedImage=c.toDataURL("image/jpeg",.76);$("preview").src=selectedImage;$("preview").style.display="block";
+   };img.src=e.target.result;
+ };reader.readAsDataURL(file);
 });
-
+$("imageUrl").addEventListener("input",()=>{if($("imageUrl").value.trim()){$("preview").src=$("imageUrl").value.trim();$("preview").style.display="block"}});
+$("loginBtn").onclick=async()=>{try{await signInWithEmailAndPassword(auth,$("email").value.trim(),$("password").value);msg($("loginMsg"),"Login সফল হয়েছে।")}catch(e){msg($("loginMsg"),"Login হয়নি: "+e.code,true)}};
+$("logoutBtn").onclick=()=>signOut(auth);
+onAuthStateChanged(auth,user=>{const ok=!!user;$("loginCard").style.display=ok?"none":"block";$("panel").style.display=ok?"block":"none";$("listCard").style.display=ok?"block":"none";if(ok)renderList()});
+function read(){try{const a=JSON.parse(localStorage.getItem("politicalNews")||"[]");return Array.isArray(a)?a:[]}catch(e){return []}}
+function save(a){localStorage.setItem("politicalNews",JSON.stringify(a))}
+$("publishBtn").onclick=()=>{
+ const title=$("title").value.trim(),content=$("content").value.trim(),image=$("imageUrl").value.trim()||selectedImage;
+ if(!title||!content){msg($("publishMsg"),"শিরোনাম ও বিস্তারিত লিখুন।",true);return}
+ const a=read();a.unshift({id:Date.now(),title,category:$("category").value,date:$("date").value||today(),content,image});save(a);
+ msg($("publishMsg"),"নিউজ প্রকাশ হয়েছে। একই ব্রাউজারে হোম পেজে দেখা যাবে।");
+ $("title").value="";$("content").value="";$("imageFile").value="";$("imageUrl").value="";selectedImage="";$("preview").style.display="none";$("date").value=today();renderList();
+};
+function renderList(){const a=read();$("list").innerHTML=a.length?a.map(n=>`<div class="news-item"><div class="small">${escapeHtml(n.category||"সংবাদ")} · ${escapeHtml(n.date||"")}</div><h3>${escapeHtml(n.title||"")}</h3>${n.image?`<img src="${escapeHtml(n.image)}" alt="">`:""}<button class="btn danger" onclick="deleteNews(${n.id})">মুছে ফেলুন</button></div>`).join(""):"কোনো নিউজ নেই।"}
+function escapeHtml(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]))}
+window.deleteNews=id=>{save(read().filter(n=>n.id!==id));renderList()}
 </script>
-
 </body>
 </html>

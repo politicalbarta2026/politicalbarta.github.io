@@ -40,6 +40,8 @@ header{
 .search-box button:hover{background:#065d2e}
 
 nav{background:#087f3f}
+.admin-link{background:#f0a500 !important;color:#111 !important;font-weight:800}
+.admin-link:hover{background:#d99100 !important;color:#111 !important}
 .nav-menu{
   max-width:1200px;margin:auto;display:flex;list-style:none;
   overflow-x:auto;scrollbar-width:none
@@ -69,7 +71,7 @@ nav{background:#087f3f}
   margin:25px 0 15px
 }
 
-/* ছবির জন্য external URL ব্যবহার করা হয়নি */
+/* বাস্তব ছবি */
 .news-image{
   width:100%;height:320px;position:relative;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
@@ -84,11 +86,13 @@ nav{background:#087f3f}
   content:"";position:absolute;width:170px;height:170px;border-radius:50%;
   background:rgba(255,255,255,.06);left:-70px;bottom:-80px
 }
-.news-icon{
-  position:relative;z-index:1;font-size:75px;filter:drop-shadow(0 5px 8px rgba(0,0,0,.2))
-}
+.news-image .real-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;display:block}
+.news-image.has-real-image::before{z-index:1}
+.news-image.has-real-image::after{z-index:1}
+.news-icon{position:relative;z-index:2;font-size:75px;filter:drop-shadow(0 5px 8px rgba(0,0,0,.2))}
+.news-image.has-real-image .news-icon{display:none}
 .news-image .image-label{
-  position:absolute;z-index:1;bottom:16px;left:18px;
+  position:absolute;z-index:3;bottom:16px;left:18px;
   background:rgba(0,0,0,.35);padding:5px 10px;border-radius:6px;
   font-size:13px
 }
@@ -269,6 +273,7 @@ function openArticle(card){
   var summary = summaryEl ? summaryEl.textContent.trim() : "";
   var icon = iconEl ? iconEl.textContent.trim() : "📰";
   var image = card.dataset ? (card.dataset.adminImage || "") : "";
+   if(!image){ var imgEl=card.querySelector(".real-image"); image=imgEl ? (imgEl.currentSrc || imgEl.src || "") : ""; }
 
   try{
     localStorage.setItem("selectedPoliticalNews", JSON.stringify({
@@ -315,6 +320,7 @@ function openArticle(card){
       <li><a href="#sports">খেলাধুলা</a></li>
       <li><a href="#entertainment">বিনোদন</a></li>
       <li><a href="#opinion">মতামত</a></li>
+      <li><a href="./admin.html" class="admin-link">🔐 Admin Panel</a></li>
     </ul>
   </nav>
 </header>
@@ -329,7 +335,8 @@ function openArticle(card){
 
   <div class="featured">
     <article class="featured-main" id="politics" onclick="openArticle(this)" tabindex="0" role="button">
-      <div class="news-image" role="img" aria-label="রাজনীতি বিষয়ক সংবাদ">
+      <div class="news-image has-real-image" role="img" aria-label="রাজনীতি বিষয়ক সংবাদ">
+        <img class="real-image" src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1200&q=80" alt="রাজনীতি" loading="lazy">
         <div class="news-icon">🏛️</div>
         <div class="image-label">রাজনৈতিক বার্তা</div>
       </div>
@@ -342,7 +349,7 @@ function openArticle(card){
 
     <div>
       <article class="featured-small" id="national" onclick="openArticle(this)" tabindex="0" role="button">
-        <div class="news-image">
+        <div class="news-image has-real-image"><img class="real-image" src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=900&q=80" alt="জাতীয়" loading="lazy">
           <div class="news-icon">🇧🇩</div>
         </div>
         <div class="featured-small-content">
@@ -352,7 +359,7 @@ function openArticle(card){
       </article>
 
       <article class="featured-small" id="international" onclick="openArticle(this)" tabindex="0" role="button">
-        <div class="news-image">
+        <div class="news-image has-real-image"><img class="real-image" src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=900&q=80" alt="আন্তর্জাতিক" loading="lazy">
           <div class="news-icon">🌍</div>
         </div>
         <div class="featured-small-content">
@@ -368,7 +375,7 @@ function openArticle(card){
   <div class="news-grid" id="newsGrid">
 
     <article class="news-card" onclick="openArticle(this)" tabindex="0" role="button">
-      <div class="news-image"><div class="news-icon">🏛️</div><div class="image-label">রাজনীতি</div></div>
+      <div class="news-image has-real-image"><img class="real-image" src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=900&q=80" alt="রাজনীতি" loading="lazy"><div class="news-icon">🏛️</div><div class="image-label">রাজনীতি</div></div>
       <div class="news-content">
         <span class="category">রাজনীতি</span>
         <h3>রাজনৈতিক অঙ্গনে গুরুত্বপূর্ণ আলোচনা চলছে</h3>
@@ -377,7 +384,7 @@ function openArticle(card){
     </article>
 
     <article class="news-card" onclick="openArticle(this)" tabindex="0" role="button">
-      <div class="news-image"><div class="news-icon">🇧🇩</div><div class="image-label">জাতীয়</div></div>
+      <div class="news-image has-real-image"><img class="real-image" src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=900&q=80" alt="জাতীয়" loading="lazy"><div class="news-icon">🇧🇩</div><div class="image-label">জাতীয়</div></div>
       <div class="news-content">
         <span class="category">জাতীয়</span>
         <h3>জাতীয় পর্যায়ে নতুন সিদ্ধান্ত নিয়ে আলোচনা</h3>
@@ -386,7 +393,7 @@ function openArticle(card){
     </article>
 
     <article class="news-card" id="economy" onclick="openArticle(this)" tabindex="0" role="button">
-      <div class="news-image"><div class="news-icon">📈</div><div class="image-label">অর্থনীতি</div></div>
+      <div class="news-image has-real-image"><img class="real-image" src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=900&q=80" alt="অর্থনীতি" loading="lazy"><div class="news-icon">📈</div><div class="image-label">অর্থনীতি</div></div>
       <div class="news-content">
         <span class="category">অর্থনীতি</span>
         <h3>অর্থনীতি নিয়ে বিশেষজ্ঞদের নতুন মতামত</h3>
@@ -395,7 +402,7 @@ function openArticle(card){
     </article>
 
     <article class="news-card" onclick="openArticle(this)" tabindex="0" role="button">
-      <div class="news-image"><div class="news-icon">🌍</div><div class="image-label">আন্তর্জাতিক</div></div>
+      <div class="news-image has-real-image"><img class="real-image" src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=900&q=80" alt="আন্তর্জাতিক" loading="lazy"><div class="news-icon">🌍</div><div class="image-label">আন্তর্জাতিক</div></div>
       <div class="news-content">
         <span class="category">আন্তর্জাতিক</span>
         <h3>আন্তর্জাতিক অঙ্গনের গুরুত্বপূর্ণ খবর</h3>
@@ -404,7 +411,7 @@ function openArticle(card){
     </article>
 
     <article class="news-card" id="sports" onclick="openArticle(this)" tabindex="0" role="button">
-      <div class="news-image"><div class="news-icon">🏏</div><div class="image-label">খেলাধুলা</div></div>
+      <div class="news-image has-real-image"><img class="real-image" src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=900&q=80" alt="খেলাধুলা" loading="lazy"><div class="news-icon">🏏</div><div class="image-label">খেলাধুলা</div></div>
       <div class="news-content">
         <span class="category">খেলাধুলা</span>
         <h3>খেলার মাঠে আজকের গুরুত্বপূর্ণ আপডেট</h3>
@@ -413,7 +420,7 @@ function openArticle(card){
     </article>
 
     <article class="news-card" id="entertainment" onclick="openArticle(this)" tabindex="0" role="button">
-      <div class="news-image"><div class="news-icon">🎬</div><div class="image-label">বিনোদন</div></div>
+      <div class="news-image has-real-image"><img class="real-image" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=900&q=80" alt="বিনোদন" loading="lazy"><div class="news-icon">🎬</div><div class="image-label">বিনোদন</div></div>
       <div class="news-content">
         <span class="category">বিনোদন</span>
         <h3>বিনোদন জগতের নতুন খবর</h3>
@@ -587,8 +594,12 @@ function showAdminNews(){
                 news.category==="জাতীয়"?"🇧🇩":"🏛️";
 
     card.dataset.adminImage=news.image||"";
+    const safeImage=news.image||"";
+    const imageHTML=safeImage
+      ? '<img class="real-image" src="'+escapeHTML(safeImage)+'" alt="'+escapeHTML(news.title||"খবর")+'" loading="lazy" onerror="this.remove();this.parentElement.classList.remove(\'has-real-image\')">'
+      : '';
     card.innerHTML=
-      '<div class="news-image"><div class="news-icon">'+icon+
+      '<div class="news-image '+(safeImage?'has-real-image':'')+'">'+imageHTML+'<div class="news-icon">'+icon+
       '</div><div class="image-label">'+escapeHTML(news.category||"সংবাদ")+
       '</div></div>'+
       '<div class="news-content">'+
