@@ -528,7 +528,6 @@
 <script>
 
 function searchNews() {
-
   const input = document
     .getElementById("searchInput")
     .value
@@ -537,7 +536,6 @@ function searchNews() {
   const cards = document.querySelectorAll(".news-card");
 
   cards.forEach(card => {
-
     const text = card.innerText.toLowerCase();
 
     if (text.includes(input)) {
@@ -545,10 +543,64 @@ function searchNews() {
     } else {
       card.style.display = "none";
     }
+  });
+}
+
+
+/* Admin Panel থেকে সংরক্ষিত খবর দেখানো */
+
+function showAdminNews() {
+
+  const newsList =
+    JSON.parse(localStorage.getItem("politicalNews")) || [];
+
+  const newsGrid = document.getElementById("newsGrid");
+
+  if (newsList.length === 0) {
+    return;
+  }
+
+  newsList.forEach(news => {
+
+    const card = document.createElement("article");
+
+    card.className = "news-card";
+
+    card.innerHTML = `
+      ${
+        news.image
+        ? `<img src="${news.image}" alt="${news.title}">`
+        : ""
+      }
+
+      <div class="news-content">
+
+        <span class="category">
+          ${news.category}
+        </span>
+
+        <h3>
+          ${news.title}
+        </h3>
+
+        <p>${news.content}</p>
+
+        <p class="date">
+          ${news.date}
+        </p>
+
+      </div>
+    `;
+
+    newsGrid.prepend(card);
 
   });
 
 }
+
+
+/* পেজ চালু হলে খবর দেখাবে */
+showAdminNews();
 
 </script>
 
