@@ -604,26 +604,451 @@ showAdminNews();
 
 </script>
 
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDAAfpIU4onE0irZGe4Bf_2zXDdlDM2e2k",
-    authDomain: "political-barta.firebaseapp.com",
-    projectId: "political-barta",
-    storageBucket: "political-barta.firebasestorage.app",
-    messagingSenderId: "75026811490",
-    appId: "1:75026811490:web:e7a4132f411f4e5c6f1f3b",
-    measurementId: "G-WGND23C2VK"
-  };
+  <title>Political Barta - Login</title>
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f1f3f6;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      background: white;
+      padding: 30px 25px;
+      border-radius: 18px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #1877f2;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    .login-btn {
+      background: #1877f2;
+      color: white;
+    }
+
+    .signup-btn {
+      background: #42b72a;
+      color: white;
+    }
+
+    .logout-btn {
+      background: #e53935;
+      color: white;
+    }
+
+    .switch {
+      text-align: center;
+      margin-top: 18px;
+      color: #1877f2;
+      cursor: pointer;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      min-height: 20px;
+    }
+
+    .user-box {
+      display: none;
+      text-align: center;
+    }
+
+    .user-email {
+      margin: 15px 0;
+      color: #444;
+      word-break: break-word;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- LOGIN -->
+    <div id="loginBox">
+
+      <div class="logo">Political Barta</div>
+
+      <div class="subtitle">
+        আপনার অ্যাকাউন্টে লগইন করুন
+      </div>
+
+      <h2>Login</h2>
+
+      <input
+        type="email"
+        id="loginEmail"
+        placeholder="Email"
+      >
+
+      <input
+        type="password"
+        id="loginPassword"
+        placeholder="Password"
+      >
+
+      <button class="login-btn" id="loginBtn">
+        Login
+      </button>
+
+      <div class="switch" id="showSignup">
+        নতুন অ্যাকাউন্ট তৈরি করুন
+      </div>
+
+      <div class="message" id="loginMessage"></div>
+
+    </div>
+
+
+    <!-- SIGN UP -->
+    <div id="signupBox" class="hidden">
+
+      <div class="logo">Political Barta</div>
+
+      <div class="subtitle">
+        নতুন অ্যাকাউন্ট তৈরি করুন
+      </div>
+
+      <h2>Sign Up</h2>
+
+      <input
+        type="email"
+        id="signupEmail"
+        placeholder="Email"
+      >
+
+      <input
+        type="password"
+        id="signupPassword"
+        placeholder="Password"
+      >
+
+      <button class="signup-btn" id="signupBtn">
+        Create Account
+      </button>
+
+      <div class="switch" id="showLogin">
+        আগে থেকেই অ্যাকাউন্ট আছে? Login
+      </div>
+
+      <div class="message" id="signupMessage"></div>
+
+    </div>
+
+
+    <!-- USER AREA -->
+    <div id="userBox" class="user-box">
+
+      <div class="logo">Political Barta</div>
+
+      <h2>স্বাগতম! 🎉</h2>
+
+      <p class="user-email" id="userEmail"></p>
+
+      <button class="logout-btn" id="logoutBtn">
+        Logout
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- FIREBASE -->
+
+  <script type="module">
+
+    import { initializeApp }
+      from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      signOut,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+    const firebaseConfig = {
+
+      apiKey: "AIzaSyDAAfpIU4onE0irZGe4Bf_2zXDdlDM2e2k",
+
+      authDomain: "political-barta.firebaseapp.com",
+
+      projectId: "political-barta",
+
+      storageBucket: "political-barta.firebasestorage.app",
+
+      messagingSenderId: "75026811490",
+
+      appId: "1:75026811490:web:e7a4132f411f4e5c6f1f3b",
+
+      measurementId: "G-WGND23C2VK"
+
+    };
+
+
+    const app = initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+
+
+    // ELEMENTS
+
+    const loginBox = document.getElementById("loginBox");
+
+    const signupBox = document.getElementById("signupBox");
+
+    const userBox = document.getElementById("userBox");
+
+    const userEmail = document.getElementById("userEmail");
+
+
+    // SHOW SIGNUP
+
+    document
+      .getElementById("showSignup")
+      .addEventListener("click", () => {
+
+        loginBox.classList.add("hidden");
+
+        signupBox.classList.remove("hidden");
+
+      });
+
+
+    // SHOW LOGIN
+
+    document
+      .getElementById("showLogin")
+      .addEventListener("click", () => {
+
+        signupBox.classList.add("hidden");
+
+        loginBox.classList.remove("hidden");
+
+      });
+
+
+    // SIGN UP
+
+    document
+      .getElementById("signupBtn")
+      .addEventListener("click", async () => {
+
+        const email =
+          document.getElementById("signupEmail").value.trim();
+
+        const password =
+          document.getElementById("signupPassword").value;
+
+
+        const message =
+          document.getElementById("signupMessage");
+
+
+        if (!email || !password) {
+
+          message.textContent =
+            "Email এবং Password দিন।";
+
+          return;
+
+        }
+
+
+        if (password.length < 6) {
+
+          message.textContent =
+            "Password কমপক্ষে ৬ অক্ষরের হতে হবে।";
+
+          return;
+
+        }
+
+
+        try {
+
+          await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+          message.textContent =
+            "অ্যাকাউন্ট তৈরি হয়েছে!";
+
+        }
+
+        catch (error) {
+
+          message.textContent =
+            error.message;
+
+        }
+
+      });
+
+
+    // LOGIN
+
+    document
+      .getElementById("loginBtn")
+      .addEventListener("click", async () => {
+
+        const email =
+          document.getElementById("loginEmail").value.trim();
+
+        const password =
+          document.getElementById("loginPassword").value;
+
+
+        const message =
+          document.getElementById("loginMessage");
+
+
+        if (!email || !password) {
+
+          message.textContent =
+            "Email এবং Password দিন।";
+
+          return;
+
+        }
+
+
+        try {
+
+          await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+          message.textContent =
+            "Login সফল হয়েছে!";
+
+        }
+
+        catch (error) {
+
+          message.textContent =
+            "Login ব্যর্থ: " + error.message;
+
+        }
+
+      });
+
+
+    // LOGOUT
+
+    document
+      .getElementById("logoutBtn")
+      .addEventListener("click", async () => {
+
+        await signOut(auth);
+
+      });
+
+
+    // AUTH STATE
+
+    onAuthStateChanged(auth, (user) => {
+
+      if (user) {
+
+        loginBox.style.display = "none";
+
+        signupBox.style.display = "none";
+
+        userBox.style.display = "block";
+
+        userEmail.textContent =
+          "Logged in as: " + user.email;
+
+      }
+
+      else {
+
+        loginBox.style.display = "block";
+
+        signupBox.style.display = "none";
+
+        userBox.style.display = "none";
+
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
